@@ -1,0 +1,154 @@
+# .bashrc
+
+# User specific aliases and functions
+
+alias la="LC_COLLATE='C' ls -al --color=auto"
+alias ls="LC_COLLATE='C' ls --color=auto"
+alias cd="cd -P"
+alias pwd="/bin/pwd"
+alias like='apropos'
+alias cdg='vncviewer localhost:10 -fullscreen -passwd ~/.vnc/passwd'
+alias dbdr='mysql -udiceroller -pdicer5ller diceroller'
+alias dbd='mysql -udice -pdice dice'
+alias dbdrdump='mysqldump -udiceroller -pdicer5ller diceroller'
+alias kdb1dump="mysqldump -h10.3.3.4 -uscopeuser -pgosonicsalpha"
+alias kdb2dump="mysqldump -h10.3.3.5 -uscopeuser -pgosonicsalpha"
+alias kdb1="mysql -h10.3.3.4 -uscopeuser -pgosonicsalpha"
+alias kdb2="mysql -h10.3.3.5 -uscopeuser -pgosonicsalpha"
+alias purge="rm *~ .*~"
+alias seadb="mysql -useabeck -pseabeck seabeck"
+alias micdb="mysql -umic -pmic mic"
+alias 22='ssh -Y seadev22'
+alias 18='ssh -Y kub18'
+alias 19='ssh -Y kub19'
+alias dsp="docker stop \$(docker ps | grep ci | awk '{print \$1}') && docker system prune -f" 
+alias ocl="oc get all -n phoenix"
+alias ocla="oc get all -n phoenix-app"
+alias ocg="oc logs "
+alias ocga="oc logs -n phoenix-app "
+alias cb='cd /home/coble/pCloudDrive/Cyberboard && wine CBPlay.exe Tom\ Waits/Tom\ Waits-Axis.gam'
+
+
+alias kan='ssh -Y -i /home/coble/.ssh/thrain.pem ubuntu@18.216.176.111'
+
+
+export GOROOT=/home/coble/go
+export GOPATH=/home/coble/work/gopath
+export HISTCONTROL=ignoredups
+export PAGER=more
+export GWT_HELIOS=/home/coble/work/gwt-helios
+export SVN_EDITOR=emacs
+export EDITOR=emacs
+export OS_PASSWORD='jskdlf77JJ'
+export GIT_SSL_NO_VERIFY=true
+PROMPT_COMMAND='echo -ne "\033]34m;${USER}@${HOSTNAME}: $(/bin/pwd)\007"'
+#PROMPT_COMMAND='echo -ne "${USER}@${HOSTNAME}: $(/bin/pwd)\007"'
+PS1="\[\e[1;35m\]\u@\h \t [\$(/bin/pwd)]\$ \[\e[m\]"
+#PS1='\u@\h \t $(/bin/pwd)\$ '
+#PS1=''
+
+export JAVADIR=/usr/java/jdk
+export CATALINA_HOME=/usr/java/tomcat
+export JAVA_HOME=/usr/java/jdk1.6.0_06
+export JDK_HOME=/usr/java/jdk1.6.0_06
+export QT_DIR=/home/coble/Qt
+export QT_VERSION=5.13.2
+export QT_API=5.13.2
+export QT_DEBUG=true
+
+export ANDROID_HOME=/home/coble/Android/android-studio
+export PATH=/home/coble/work/go/bin:/usr/local/go/bin:/home/coble/node/bin:$JAVA_HOME/jre/bin:$JAVA_HOME/bin:$ANT_HOME/bin:$HOME/eclipse:$HOME/gwt:$HOME/local/bin:$HOME/bin:/sbin:/usr/sbin:$PATH:$HOME/work/gwt2/google_appengine:$HOME/work/qt/QtSDK/Desktop/Qt/473/gcc/bin:/cmscripts/bin:/build/cm/bin/vnc:/home/coble/bin:/vol/3/user/coble/bin:/vol/3/user/coble/local/bin:/usr/local/bin:/home/coble/go/bin:$ANDROID_HOME/bin:$GOROOT/bin:$GOPATH/bin
+
+export GWT_EXTERNAL_BROWSER=/usr/bin/firefox
+
+export CLICOLOR=1
+# Black       0;30     Bold Gray    1;30
+# Blue        0;34     Bold Blue    1;34
+# Green       0;32     Bold Green   1;32
+# Cyan        0;36     Bold Cyan    1;36
+# Red         0;31     Bold Red     1;31
+# Purple      0;35     Bold Purple  1;35
+# Yellow      0;33     Bold Yellow  1;33
+# White       0;37     Bold White   1;37
+
+LS_COLORS=''
+LS_COLORS=$LS_COLORS:'no=0'           # Normal text
+LS_COLORS=$LS_COLORS:'fi=32'          # Regular file
+LS_COLORS=$LS_COLORS:'di=31'          # Directory
+LS_COLORS=$LS_COLORS:'su=40'          # setuid
+LS_COLORS=$LS_COLORS:'sg=40'          # setgid
+LS_COLORS=$LS_COLORS:'ow=40'          # other writable
+LS_COLORS=$LS_COLORS:'tw=40'          # sticky other writable
+LS_COLORS=$LS_COLORS:'st=40'          # sticky
+LS_COLORS=$LS_COLORS:'st=92'          # sticky
+LS_COLORS=$LS_COLORS:'ln=31'        # Symbolic link
+LS_COLORS=$LS_COLORS:'pi=33'          # Named pipe
+LS_COLORS=$LS_COLORS:'so=01;35'       # Socket
+LS_COLORS=$LS_COLORS:'do=01;35'       # DO
+LS_COLORS=$LS_COLORS:'bd=01;37'       # Block device
+LS_COLORS=$LS_COLORS:'cd=01;37'       # Character device
+LS_COLORS=$LS_COLORS:'ex=36'          # Executable file
+export LS_COLORS
+
+function cdd {
+    cd $(pwd | sed -e "s,$1,$2,")
+}
+
+function eo {
+    basedir=`p4 client -o | grep '^Root:' | sed -e 's/Root:\s*//'`
+    echo basedir = $basedir
+    emacs `p4 opened | sed -e 's/#.*//' | sed -e 's@\/\/depot\/[a-z]*\/[\.0-9a-z-]*@\/'"$basedir"'\/@'` &
+}
+
+function lo {
+    basedir=`p4 client -o | grep '^Root:' | sed -e 's/Root:\s*//'`
+    echo basedir = $basedir
+    p4 opened | sed -e 's/#.*//' | sed -e 's@\/\/depot\/[a-z]*\/[\.0-9a-z-]*\/@\/'"$basedir"'\/@'
+}
+
+function llo {
+    p4 opened | sed -e 's/#.*//' | sed -e 's@\/\/depot\/[a-z]*\/[\.0-9a-z-]*\/@ @'
+}
+
+function lllo {
+    p4 opened | sed -e 's/#.*//' | sed -e 's@\/\/depot\/[a-z]*\/[\.0-9a-z-]*\/[\.0-9a-zA-Z-]*\/@ @'
+}
+
+function p4d {
+    p4 describe -s $1
+}
+
+function p4i {
+    p4 annotate -I $1
+}
+
+
+
+
+function cdu {
+    if [ $1 -eq 1 ]
+    then
+        cd ..
+    elif [ $1 -gt 1 ]
+    then
+        CT=1;
+        UP='..'
+        while [ $CT -lt $1 ]; do
+            UP+="/.."
+            let CT+=1
+        done
+        cd $UP
+    fi
+}
+
+
+function grepr {
+    OIFS="$IFS"
+    IFS=$'\n'
+    for i in `find . -type f`; do grep $1 $i /dev/null ; done
+    IFS="$OIFS"
+}
+
+function dcp {
+    cp $1 $2$1	 
+}
