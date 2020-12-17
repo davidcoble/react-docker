@@ -1,15 +1,18 @@
+.PHONY: client
+.PHONY: server
+.PHONY: build
 
-up:
+up: build
 	docker-compose up
 
 down:
 	docker-compose down
 
-out:
+out: build
 	docker-compose up -d
 
-.PHONY: client
-.PHONY: server
+build: down
+	docker-compose build
 
 MY_CLIENT := $(shell docker ps | grep _client | cut -d ' ' -f1 )
 MY_SERVER := $(shell docker ps | grep _server | cut -d ' ' -f1 )

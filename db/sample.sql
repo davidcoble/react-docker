@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `sample` (
-  `id` int(255) auto_increment NOT NULL,
+  `id` int(255) primary key auto_increment NOT NULL,
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
